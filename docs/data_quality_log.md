@@ -52,3 +52,11 @@ Notes:
 - 906 events excluded (450 zero revenue + 456 with no ID but positive revenue worth 31,817).
 - About 335 events repeat a real order ID. Not yet checked.
 - Sensitivity check planned: report revenue with and without the 456 positive-revenue events.
+
+## 25 Nov 2026: repeated order IDs (query 04_duplicate_order_check.sql)
+
+- 326 order IDs appear more than once (335 extra events).
+- 15 IDs show multiple users, 15 show different revenue, 15 span multiple dates (columns read from truncated headers; overlap between these groups not yet confirmed).
+- At least 281 repeated IDs are consistent (same user, revenue, date). Likely one order recorded twice. Hypothesis, not confirmed.
+- Up to 15 IDs may be one ID reused for different orders. To inspect.
+- Proposed rule: one row per order ID when repeats are identical. Flagged IDs decided after inspection.
