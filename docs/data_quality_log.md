@@ -91,3 +91,11 @@ Notes:
 - Possible cause: earlier use before the first_visit was recorded. Hypothesis, not confirmed.
 - Decision: exclude these 15 users from new-user cohorts.
 - Users with no first_visit: about 12,840 (270,154 - 257,314). Also excluded from new-user cohorts.
+
+## 25 Nov 2026: daily volume (query 08_daily_volume_check.sql)
+
+- Average daily volume: about 46,691 events.
+- Lowest day: 25 Dec 2020 with 21,355 events (about 46% of average). No day is empty.
+- Eight of the 10 lowest days fall between 24 Dec 2020 and 3 Jan 2021 (holiday period). Likely lower traffic. Hypothesis, not confirmed.
+- Tracking looks active on all low days (first visits and purchases still recorded).
+- Limitation: holiday seasonality may affect cohort retention for late-December starters.
