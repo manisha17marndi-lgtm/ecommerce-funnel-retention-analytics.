@@ -37,3 +37,18 @@ Notes:
 3. 4,786 events have a real ID (5,692 - 23 - 883) and share 4,451 IDs, so about 335 events repeat an order ID. Cause unknown. Not deleted yet.
 4. 450 events have zero or negative revenue. Overlap with missing IDs not yet checked.
 5. The true order count is lower than 5,692, so purchase events cannot be used as orders directly.
+
+## 25 Nov 2026: purchase overlap (query 03_purchase_overlap_check.sql)
+
+| id_status | revenue_status | events | distinct_ids | revenue |
+|---|---|---|---|---|
+| has_id | positive | 4,786 | 4,451 | 330,348 |
+| not_set_id | positive | 433 | 1 | 30,489 |
+| not_set_id | zero_or_negative | 450 | 1 | 0 |
+| null_id | positive | 23 | 0 | 1,328 |
+
+- All 450 zero-revenue events have "(not set)" as ID.
+- Proposed valid order: real ID, revenue above 0, one row per ID.
+- 906 events excluded (450 zero revenue + 456 with no ID but positive revenue worth 31,817).
+- About 335 events repeat a real order ID. Not yet checked.
+- Sensitivity check planned: report revenue with and without the 456 positive-revenue events.
