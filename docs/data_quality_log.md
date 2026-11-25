@@ -83,3 +83,11 @@ Notes:
 - Possible cause: identifier reset. Hypothesis, not confirmed.
 - Decision: use the earliest first_visit timestamp as the cohort start. All users kept.
 - Limitation: a small number of users may sit in the wrong signup week.
+
+## 25 Nov 2026: events before first_visit (query 07_events_before_first_visit.sql)
+
+- 257,314 users have a first_visit.
+- 15 users have events on an earlier day than their first_visit. 257,299 start on the same day.
+- Possible cause: earlier use before the first_visit was recorded. Hypothesis, not confirmed.
+- Decision: exclude these 15 users from new-user cohorts.
+- Users with no first_visit: about 12,840 (270,154 - 257,314). Also excluded from new-user cohorts.
