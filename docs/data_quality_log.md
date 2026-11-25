@@ -69,3 +69,17 @@ Notes:
 - Decision: order key = transaction_id + user_pseudo_id; keep earliest event per key.
 - Expected orders after this rule: about 4,466 (4,451 + 15). To confirm when building the orders table.
 - Assumption: the 8-minute repeat for 43463 is a duplicate. Limitation: not provable from this data.
+
+## 25 Nov 2026: repeated first_visit (query 06_first_visit_duplicates.sql)
+
+| first_visit events per user | users | users on multiple dates |
+|---|---|---|
+| 1 | 257,167 | 0 |
+| 2 | 146 | 65 |
+| 3 | 1 | 0 |
+
+- Totals reconcile: 257,314 users and 148 extra events.
+- 147 users (about 0.06%) have more than one first_visit. 65 of them on different dates.
+- Possible cause: identifier reset. Hypothesis, not confirmed.
+- Decision: use the earliest first_visit timestamp as the cohort start. All users kept.
+- Limitation: a small number of users may sit in the wrong signup week.
