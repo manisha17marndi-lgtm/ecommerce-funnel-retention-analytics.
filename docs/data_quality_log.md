@@ -60,3 +60,12 @@ Notes:
 - At least 281 repeated IDs are consistent (same user, revenue, date). Likely one order recorded twice. Hypothesis, not confirmed.
 - Up to 15 IDs may be one ID reused for different orders. To inspect.
 - Proposed rule: one row per order ID when repeats are identical. Flagged IDs decided after inspection.
+
+## 25 Nov 2026: odd order IDs (query 05_odd_order_ids.sql)
+
+- 15 order IDs, 33 rows (18 extra events). The same 15 IDs show multiple users, revenue and dates.
+- Pattern A (3 IDs: 140428, 333223, 43463): same user, same revenue, 24-33 ms apart (8 minutes for 43463). Likely one order recorded twice. Hypothesis.
+- Pattern B (all 15 IDs): same ID used by different users on different dates with different revenue. Treated as separate orders.
+- Decision: order key = transaction_id + user_pseudo_id; keep earliest event per key.
+- Expected orders after this rule: about 4,466 (4,451 + 15). To confirm when building the orders table.
+- Assumption: the 8-minute repeat for 43463 is a duplicate. Limitation: not provable from this data.
