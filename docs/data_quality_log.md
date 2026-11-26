@@ -267,3 +267,30 @@ Cohort: new users (no earlier activity). Day N = first_visit date + N days (UTC 
 - Decision: primary retention = session return; secondary = shopping return. BRD retention definition updated (v0.2).
 - Limitation: day boundary uses UTC dates.
 
+## 26 Nov 2026: weekly cohort retention (query 26_retention_weekly_cohorts.sql)
+
+Cohort week starts Sunday (first_visit week). A cohort is shown for Day N only if its last day + N is on or before 31 Jan 2021. Session return = session_start on exactly Day N (UTC dates).
+
+| cohort week | users | D1 session % | D7 session % | D30 session % (users) | D1 shopping % | D7 shopping % |
+|---|---|---|---|---|---|---|
+| 2020-11-01 | 16,925 | 4.73 | 0.83 | 0.21 (36) | 0.97 | 0.15 |
+| 2020-11-08 | 14,543 | 5.27 | 1.27 | 0.24 (35) | 1.05 | 0.41 |
+| 2020-11-15 | 16,584 | 5.83 | 0.87 | 0.20 (33) | 1.39 | 0.26 |
+| 2020-11-22 | 18,300 | 4.83 | 0.89 | 0.03 (5) | 1.07 | 0.28 |
+| 2020-11-29 | 21,109 | 5.19 | 0.85 | 0.07 (15) | 1.32 | 0.27 |
+| 2020-12-06 | 27,093 | 4.35 | 0.66 | 0.15 (41) | 1.09 | 0.24 |
+| 2020-12-13 | 24,524 | 3.80 | 0.39 | 0.13 (31) | 1.19 | 0.13 |
+| 2020-12-20 | 17,397 | 3.12 | 0.33 | 0.09 (15) | 0.48 | 0.14 |
+| 2020-12-27 | 16,224 | 2.81 | 0.37 | n/a | 0.47 | 0.06 |
+| 2021-01-03 | 22,319 | 3.54 | 0.47 | n/a | 0.70 | 0.13 |
+| 2021-01-10 | 21,025 | 3.58 | 0.61 | n/a | 0.64 | 0.16 |
+| 2021-01-17 | 20,318 | 4.22 | 0.65 | n/a | 1.06 | 0.24 |
+| 2021-01-24 | 18,813 | 3.89 | n/a | n/a | 0.97 | n/a |
+| 2021-01-31 | 2,125 | n/a | n/a | n/a | n/a | n/a |
+
+- Cohort users sum to 257,299 (257,314 minus 15 flagged). First 13 cohorts sum to 255,174 = Day 1 eligible users in the overall query. Size-weighted Day 1 average about 4.21%, matching overall.
+- Early-season cohorts retain better at Day 1 and Day 7. Dip in the weeks of 13 Dec to 27 Dec.
+- December cohorts are the largest but retain worse. Possible reason: more one-off holiday visitors. Hypothesis.
+- Day 30 cells hold 5 to 41 users. Not reliable for comparison.
+- Cannot separate seasonality from product or tracking changes. Rough standard-error check suggests the Day 1 gap exceeds sampling noise. Formal tests in Python.
+- Weekly eligibility is stricter than the overall query, so Day 7 and Day 30 figures differ by construction.
