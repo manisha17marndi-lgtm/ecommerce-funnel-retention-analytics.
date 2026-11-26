@@ -144,3 +144,16 @@ Notes:
 - 242 events with positive revenue but no usable ID (14,735 revenue). Cannot be deduplicated. Sensitivity: revenue 258,165 if included (about +6%).
 - 380 zero-revenue events probably not sales. Hypothesis.
 - Decision: funnel purchase stage = user with a purchase event with revenue above 0. Revenue metrics use the orders table. Strict and loose definitions reported as sensitivity checks.
+
+
+## 26 Nov 2026: acquisition source/medium (query 17_source_medium_values.sql)
+
+- 10 distinct source/medium combinations across 257,314 users.
+- Largest: google/organic 35.07%, (direct)/(none) 23.84%, <Other>/<Other> 18.03%, <Other>/referral 9.29%, google/cpc 5.48%.
+- 78,786 users (30.6%) have source <Other>. Likely obfuscation in the sample data. Hypothesis.
+- 46,399 users (18%) have both source and medium <Other>. Cannot be assigned to a channel.
+- shop.googlemerchandisestore... as referral: 12,775 users (about 5%). Looks like the store's own domain, so probably not true acquisition. Hypothesis.
+- 88 users have "(data deleted)" values.
+- Channel grouping: Organic Search, Direct, Paid Search, Referral, Store referral (own domain), Unclassified (obfuscated), Data deleted/other.
+- Limitation: channel comparisons are weaker because 18% of users are unclassified.
+  
