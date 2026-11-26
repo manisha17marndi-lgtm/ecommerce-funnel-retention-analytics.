@@ -118,3 +118,13 @@ Notes:
 - Purchasing users: 3,511 here vs 4,419 in raw data (step 4). 908 purchasing users (about 20.5%) have no first_visit in the window, and their 1,283 purchase events are excluded. Likely returning customers. Hypothesis.
 - Limitation: funnel and revenue results describe new users in the window, not all store customers.
 - add_shipping_info users (8,309) almost equal begin_checkout users (8,310). Cause unknown.
+
+## 26 Nov 2026: orders table built (queries 14 and 15)
+
+- Table: ga4_project.orders. Grain: one row per valid order (order_id + user_id), new users only.
+- Valid order: real transaction_id, revenue above 0, earliest event kept per order_id + user_id.
+- Rows: 3,542 = distinct order keys 3,542. Purchasing users: 3,007. Revenue: 243,430.0 (USD).
+- 4,409 purchase events in events table; 867 did not become orders. Breakdown by reason pending (step 15).
+- 504 users (3,511 - 3,007) have purchase events but no valid order.
+- Open question: should the funnel purchase stage use valid orders or purchase events? Decide at the funnel step and report the other as a sensitivity check.
+- Limitation: revenue covers new users in the window, not all store customers.
