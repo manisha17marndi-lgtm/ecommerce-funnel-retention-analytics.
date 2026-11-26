@@ -156,4 +156,11 @@ Notes:
 - 88 users have "(data deleted)" values.
 - Channel grouping: Organic Search, Direct, Paid Search, Referral, Store referral (own domain), Unclassified (obfuscated), Data deleted/other.
 - Limitation: channel comparisons are weaker because 18% of users are unclassified.
+
+## 26 Nov 2026: channel grouping (queries 18 and 19)
+
+- Table: ga4_project.users_with_channel (users plus channel_group). Original users table untouched.
+- Groups: Organic Search 98,720 (38.37%), Direct 61,335 (23.84%), Unclassified (obfuscated) 46,399 (18.03%), Referral 23,902 (9.29%), Paid Search 14,094 (5.48%), Store referral (own domain) 12,775 (4.96%), Data deleted / other 89 (0.03%).
+- Total 257,314 = users table. No user lost or duplicated.
+- Limitation: 18% of users are unclassified, so channel comparisons are weaker. Report Unclassified separately.
   
