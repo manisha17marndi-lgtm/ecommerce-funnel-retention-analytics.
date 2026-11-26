@@ -335,3 +335,10 @@ Session return on exact Day N (UTC dates). User-level eligibility: first_visit d
 - Repeat purchase 9.7 to 12.6% on 10 to 100 repeat buyers per channel. Rough z for widest gap about 0.75. Within chance.
 - Overall 30-day repeat rate: 258 of 2,333 buyers (11.06%).
 - Limitation: no cost data, so no ROI claim. Revenue is observed in a short window, not lifetime value.
+
+## 26 Nov 2026: reporting table (queries 29 and 30)
+
+- Table: ga4_project.rpt_user_metrics. Grain: one row per new user (no earlier activity), 257,299 users.
+- Columns: channel, device, cohort week, eligibility flags (D1, D7/funnel, D30/repeat), 7-day funnel flags, orders and revenue (7d), orders (30d), retention flags (session D1/D7/D30, shopping D1/D7).
+- Reconciliation check matched earlier results: users 257,299; funnel cohort 238,636; buyers (7d) 2,424; revenue (7d) 185,106; D1 returned 10,754; D7 returned 1,586; D30 returned 223.
+- Purpose: single source for Power BI measures and the Python recalculation.
