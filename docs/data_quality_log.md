@@ -194,3 +194,23 @@ Cohort: 238,636 new users (7-day window). Reach counts, any order: view_item 50,
 - Cart to checkout reported as a range: 36.4% (strict) to 42.1% (reach-based among cart users).
 - Decision: report strict and reach-based funnels; use reach-based for channel and device comparisons.
 - Open: strict and loose purchase counts in the sequential funnel are identical (1,703). Cause not yet tested.
+
+## 26 Nov 2026: funnel by channel (query 22_funnel_by_channel.sql)
+
+Reach-based funnel, 7-day window, cohort 238,636 users (channel users sum to this total).
+
+| channel | users | viewed item | view to cart | checkout to purchase | purchased of users |
+|---|---|---|---|---|---|
+| Organic Search | 91,545 | 21.06% | 18.78% | 34.04% | 1.03% |
+| Direct | 56,880 | 21.00% | 20.06% | 33.45% | 1.01% |
+| Unclassified | 43,040 | 20.83% | 19.71% | 33.23% | 1.02% |
+| Referral | 22,219 | 20.87% | 19.41% | 33.43% | 0.99% |
+| Paid Search | 13,049 | 20.73% | 17.63% | 35.85% | 1.02% |
+| Store referral | 11,824 | 21.60% | 18.79% | 28.35% | 0.91% |
+| Data deleted / other | 79 | 30.38% | 16.67% | 80.00% | 5.06% |
+
+- Conversion is about 1% in all large channels. Largest drops (visit to view, view to cart) appear in every channel, so they look site-wide.
+- Store referral checkout-to-purchase (28.35%) vs Organic (34.04%): rough z about 2.3. Lead only, multiple comparisons. Formal test in Python.
+- Paid Search view-to-cart (17.63%) vs Organic (18.78%): rough z about 1.5. Within chance.
+- "Data deleted / other" has 79 users. Ignore its percentages.
+- Hypothesis: obfuscation in the sample may flatten channel differences. Limitation.
