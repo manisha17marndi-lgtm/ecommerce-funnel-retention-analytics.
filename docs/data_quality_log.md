@@ -128,3 +128,19 @@ Notes:
 - 504 users (3,511 - 3,007) have purchase events but no valid order.
 - Open question: should the funnel purchase stage use valid orders or purchase events? Decide at the funnel step and report the other as a sensitivity check.
 - Limitation: revenue covers new users in the window, not all store customers.
+
+## 26 Nov 2026: orders reconciliation (query 16_orders_reconciliation.sql)
+
+| status | events | users | revenue |
+|---|---|---|---|
+| no transaction ID | 13 | 12 | 735 |
+| "(not set)" ID, zero revenue | 380 | 333 | 0 |
+| "(not set)" ID, positive revenue | 229 | 206 | 14,000 |
+| repeat of a valid order | 245 | 221 | 16,702 |
+| kept as order | 3,542 | 3,007 | 243,430 |
+
+- Events reconcile to 4,409 purchase events in the events table.
+- Repeats removed carry 16,702 revenue (about 6% of total). Assumed to be duplicates. If some are real separate purchases, revenue is understated.
+- 242 events with positive revenue but no usable ID (14,735 revenue). Cannot be deduplicated. Sensitivity: revenue 258,165 if included (about +6%).
+- 380 zero-revenue events probably not sales. Hypothesis.
+- Decision: funnel purchase stage = user with a purchase event with revenue above 0. Revenue metrics use the orders table. Strict and loose definitions reported as sensitivity checks.
