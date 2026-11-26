@@ -314,3 +314,24 @@ Session return on exact Day N (UTC dates). User-level eligibility: first_visit d
 - Largest gaps (Paid vs Organic D1, rough z about 1.4; Store referral vs Organic D7, about 1.7) are within chance. Formal tests in Python.
 - Day 30 rests on 11 to 75 returning users per channel. Not reliable for comparison.
 - Hypothesis: obfuscation may flatten channel differences. Limitation.
+
+## 26 Nov 2026: revenue and repeat purchase by channel (query 28_revenue_by_channel.sql)
+
+7-day metrics: new users with first_visit on or before 24 Jan 2021. Repeat rate: 30-day window, first_visit on or before 1 Jan 2021. Revenue from valid orders only.
+
+| channel | users | orders | buyers | revenue | AOV | revenue per user | repeat buyers / buyers (30d) | repeat rate |
+|---|---|---|---|---|---|---|---|---|
+| Organic Search | 91,545 | 1,078 | 947 | 71,308 | 66.15 | 0.779 | 100 / 937 | 10.67% |
+| Direct | 56,880 | 663 | 572 | 43,728 | 65.95 | 0.769 | 62 / 536 | 11.57% |
+| Unclassified | 43,040 | 487 | 440 | 32,622 | 66.99 | 0.758 | 46 / 412 | 11.17% |
+| Referral | 22,219 | 245 | 220 | 17,452 | 71.23 | 0.785 | 26 / 207 | 12.56% |
+| Paid Search | 13,049 | 143 | 133 | 10,752 | 75.19 | 0.824 | 14 / 133 | 10.53% |
+| Store referral | 11,824 | 119 | 108 | 9,071 | 76.23 | 0.767 | 10 / 103 | 9.71% |
+| Data deleted / other | 79 | 4 | 4 | 173 | 43.25 | 2.19 | 0 / 5 | 0.00% |
+
+- Reconciles: users 238,636; buyers 2,424 (match reach-based funnel); orders 2,739; revenue 185,106 (7-day window, below full-window 243,430 as expected).
+- Revenue per user 0.76 to 0.82 across large channels. Differences untested.
+- Paid Search and Store referral AOV (75.19, 76.23) above Organic (66.15). Based on 143 and 119 orders. Lead only. Bootstrap or t-test in Python.
+- Repeat purchase 9.7 to 12.6% on 10 to 100 repeat buyers per channel. Rough z for widest gap about 0.75. Within chance.
+- Overall 30-day repeat rate: 258 of 2,333 buyers (11.06%).
+- Limitation: no cost data, so no ROI claim. Revenue is observed in a short window, not lifetime value.
