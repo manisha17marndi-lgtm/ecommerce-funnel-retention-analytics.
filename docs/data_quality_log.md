@@ -99,3 +99,11 @@ Notes:
 - Eight of the 10 lowest days fall between 24 Dec 2020 and 3 Jan 2021 (holiday period). Likely lower traffic. Hypothesis, not confirmed.
 - Tracking looks active on all low days (first visits and purchases still recorded).
 - Limitation: holiday seasonality may affect cohort retention for late-December starters.
+
+## 25 Nov 2026: users table built (queries 10 and 11)
+
+- Table: ga4_project.users. Grain: one row per user_pseudo_id with a first_visit.
+- Rows: 257,314 = distinct users 257,314. Matches the first_visit user count from step 3.
+- 15 users flagged had_earlier_activity (matches step 9). Kept, not deleted.
+- Device and source come from each user's earliest non-null value.
+- null_device 0, null_source 0. Source values may still contain placeholders such as "(direct)". To inspect before grouping channels.
