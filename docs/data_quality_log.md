@@ -230,3 +230,22 @@ Reach-based funnel, 7-day window, cohort 238,636 users (device users sum to this
 - With channel results, conversion is about 1% in every segment. Largest drops look site-wide.
 - Limitation: device is each user's earliest recorded value. Cross-device behaviour not captured.
 - Formal tests (confidence intervals, two-proportion tests) planned in Python.
+
+## 26 Nov 2026: time to first order (query 24_time_to_first_order.sql)
+
+Cohort: new users with first_visit on or before 31 Dec 2020 (at least 31 days of follow-up). 2,417 buyers.
+
+| time to first valid order | users | % of buyers | cumulative % |
+|---|---|---|---|
+| under 24h | 1,520 | 62.89% | 62.89% |
+| 24h to 48h | 134 | 5.54% | 68.43% |
+| 2 to 7 days | 252 | 10.43% | 78.86% |
+| 7 to 14 days | 176 | 7.28% | 86.14% |
+| 14 to 30 days | 243 | 10.05% | 96.19% |
+| over 30 days | 92 | 3.81% | 100.00% |
+
+- No order earlier than first_visit.
+- 7-day window captures about 79% of first orders. 30-day captures about 96%.
+- Decision: keep 7 days as primary conversion window; report 30-day conversion as a sensitivity check (cohorts through 1 Jan 2021).
+- Limitation: the funnel's 7-day conversion is a lower bound. Over-30-day group is truncated by the end of data.
+- Open question 1 (BRD): resolved.
