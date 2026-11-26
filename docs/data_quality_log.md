@@ -181,3 +181,16 @@ Cohort: new users, no earlier activity, first_visit on or before 24 Jan 2021 (7 
 - Strict and loose purchase counts are identical. Hypothesis: purchases with placeholder IDs come from users who skip earlier tracked stages. To test.
 - 8,310 new users have a begin_checkout event at any time, but only 3,512 reach it in sequence within 7 days. Possible causes: 7-day window, skipped stages, tracking gaps. To test.
 - Limitation: conversion applies to new users in the window, not all store visitors.
+
+
+## 26 Nov 2026: skipped stages (query 21_funnel_skipped_stages.sql)
+
+Cohort: 238,636 new users (7-day window). Reach counts, any order: view_item 50,110; add_to_cart 9,644; begin_checkout 7,231; purchase (valid order) 2,424.
+
+- cart without view: 3. checkout without cart: 3,175 (43.9% of checkout users). purchase without checkout: 0. purchase without cart: 709 (29.2% of buyers).
+- add_to_cart appears under-recorded. Possible causes: buy-now path, add from list or promotion, tracking gap. Hypotheses, not confirmed.
+- Overall conversion: strict sequence 0.71% (1,703), reach-based about 1.02% (2,424).
+- Checkout to purchase: 48.49% strict, 33.52% by reach. Reach-based is more defensible because every buyer has a checkout event.
+- Cart to checkout reported as a range: 36.4% (strict) to 42.1% (reach-based among cart users).
+- Decision: report strict and reach-based funnels; use reach-based for channel and device comparisons.
+- Open: strict and loose purchase counts in the sequential funnel are identical (1,703). Cause not yet tested.
