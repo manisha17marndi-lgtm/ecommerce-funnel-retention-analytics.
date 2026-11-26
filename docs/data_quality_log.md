@@ -164,3 +164,20 @@ Notes:
 - Total 257,314 = users table. No user lost or duplicated.
 - Limitation: 18% of users are unclassified, so channel comparisons are weaker. Report Unclassified separately.
   
+## 26 Nov 2026: overall funnel (query 20_funnel_overall.sql)
+
+Cohort: new users, no earlier activity, first_visit on or before 24 Jan 2021 (7 full days of data). Stages in order within 7 days of first_visit.
+
+| stage | users | stage conversion | drop-off |
+|---|---|---|---|
+| first_visit | [fill in s1] | N/A | N/A |
+| view_item | 50,110 | 21.00% | 79.00% |
+| add_to_cart | 9,641 | 19.24% | 80.76% |
+| begin_checkout | 3,512 | 36.43% | 63.57% |
+| purchase (loose and strict) | 1,703 | 48.49% | 51.51% |
+
+- Overall conversion (loose): 0.71%.
+- Largest percentage loss: view_item to add_to_cart (80.76%).
+- Strict and loose purchase counts are identical. Hypothesis: purchases with placeholder IDs come from users who skip earlier tracked stages. To test.
+- 8,310 new users have a begin_checkout event at any time, but only 3,512 reach it in sequence within 7 days. Possible causes: 7-day window, skipped stages, tracking gaps. To test.
+- Limitation: conversion applies to new users in the window, not all store visitors.
