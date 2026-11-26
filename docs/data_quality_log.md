@@ -249,3 +249,21 @@ Cohort: new users with first_visit on or before 31 Dec 2020 (at least 31 days of
 - Decision: keep 7 days as primary conversion window; report 30-day conversion as a sensitivity check (cohorts through 1 Jan 2021).
 - Limitation: the funnel's 7-day conversion is a lower bound. Over-30-day group is truncated by the end of data.
 - Open question 1 (BRD): resolved.
+
+## 26 Nov 2026: overall retention (query 25_retention_overall.sql)
+
+Cohort: new users (no earlier activity). Day N = first_visit date + N days (UTC dates). Exact-day returns only. Eligible if first_visit date + N is on or before 31 Jan 2021.
+
+| day | eligible users | session return | shopping return |
+|---|---|---|---|
+| Day 1 | 255,174 | 10,754 (4.21%) | 2,457 (0.96%) |
+| Day 7 | 238,636 | 1,586 (0.66%) | 482 (0.20%) |
+| Day 30 | 170,403 | 223 (0.13%) | 85 (0.05%) |
+
+- Retention is low and falls steeply. No benchmark verified, so no good/bad claim.
+- Exact-day definition is strict. A "returned within N days" sensitivity check is planned.
+- Shopping return at Day 30 is only 85 users. Splits by cohort or channel will be noisy.
+- Possible causes of low retention (hypotheses): device/cookie-based IDs, one-off merchandise visits, obfuscation.
+- Decision: primary retention = session return; secondary = shopping return. BRD retention definition updated (v0.2).
+- Limitation: day boundary uses UTC dates.
+
