@@ -107,3 +107,14 @@ Notes:
 - 15 users flagged had_earlier_activity (matches step 9). Kept, not deleted.
 - Device and source come from each user's earliest non-null value.
 - null_device 0, null_source 0. Source values may still contain placeholders such as "(direct)". To inspect before grouping channels.
+
+## 26 Nov 2026: events table built (queries 12 and 13)
+
+- Table: ga4_project.events. Grain: one row per event, for users in the users table only.
+- Event types kept: first_visit, session_start, view_item, add_to_cart, begin_checkout, add_shipping_info, add_payment_info, purchase.
+- Rows: view_item 333,399; session_start 332,219; first_visit 257,462; add_to_cart 50,322; begin_checkout 32,805; add_shipping_info 16,293; add_payment_info 10,651; purchase 4,409.
+- Rows equal distinct event keys for every event. Limitation: the key includes the exact timestamp, so near-duplicate events (milliseconds apart) are not detected by this check.
+- null session_id: 0 for all events.
+- Purchasing users: 3,511 here vs 4,419 in raw data (step 4). 908 purchasing users (about 20.5%) have no first_visit in the window, and their 1,283 purchase events are excluded. Likely returning customers. Hypothesis.
+- Limitation: funnel and revenue results describe new users in the window, not all store customers.
+- add_shipping_info users (8,309) almost equal begin_checkout users (8,310). Cause unknown.
