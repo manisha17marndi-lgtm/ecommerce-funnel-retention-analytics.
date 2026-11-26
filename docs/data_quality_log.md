@@ -214,3 +214,19 @@ Reach-based funnel, 7-day window, cohort 238,636 users (channel users sum to thi
 - Paid Search view-to-cart (17.63%) vs Organic (18.78%): rough z about 1.5. Within chance.
 - "Data deleted / other" has 79 users. Ignore its percentages.
 - Hypothesis: obfuscation in the sample may flatten channel differences. Limitation.
+
+## 26 Nov 2026: funnel by device (query 23_funnel_by_device.sql)
+
+Reach-based funnel, 7-day window, cohort 238,636 users (device users sum to this total).
+
+| device | users | viewed item | view to cart | checkout to purchase | purchased of users |
+|---|---|---|---|---|---|
+| desktop | 138,616 | 21.13% | 19.23% | 33.25% | 1.01% |
+| mobile | 94,670 | 20.81% | 19.33% | 34.07% | 1.04% |
+| tablet | 5,350 | 20.90% | 18.16% | 30.52% | 0.88% |
+
+- Desktop vs mobile overall conversion: rough z about 0.7. No meaningful difference.
+- Tablet is lower but small (154 checkout users). Rough z about 0.9 vs desktop. Within chance.
+- With channel results, conversion is about 1% in every segment. Largest drops look site-wide.
+- Limitation: device is each user's earliest recorded value. Cross-device behaviour not captured.
+- Formal tests (confidence intervals, two-proportion tests) planned in Python.
