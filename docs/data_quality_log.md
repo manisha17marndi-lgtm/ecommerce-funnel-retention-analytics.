@@ -294,3 +294,23 @@ Cohort week starts Sunday (first_visit week). A cohort is shown for Day N only i
 - Day 30 cells hold 5 to 41 users. Not reliable for comparison.
 - Cannot separate seasonality from product or tracking changes. Rough standard-error check suggests the Day 1 gap exceeds sampling noise. Formal tests in Python.
 - Weekly eligibility is stricter than the overall query, so Day 7 and Day 30 figures differ by construction.
+
+## 26 Nov 2026: retention by channel (query 27_retention_by_channel.sql)
+
+Session return on exact Day N (UTC dates). User-level eligibility: first_visit date + N on or before 31 Jan 2021.
+
+| channel | D1 users | D1 % | D7 % | D30 users | D30 returned | D30 % |
+|---|---|---|---|---|---|---|
+| Organic Search | 97,894 | 4.15 | 0.70 | 65,394 | 75 | 0.11 |
+| Direct | 60,847 | 4.33 | 0.63 | 40,523 | 58 | 0.14 |
+| Unclassified | 46,028 | 4.14 | 0.64 | 30,698 | 38 | 0.12 |
+| Referral | 23,707 | 4.21 | 0.74 | 15,837 | 25 | 0.16 |
+| Paid Search | 13,954 | 4.41 | 0.66 | 9,399 | 11 | 0.12 |
+| Store referral | 12,659 | 4.21 | 0.56 | 8,499 | 16 | 0.19 |
+| Data deleted / other | 85 | 10.59 | 1.27 | 53 | 0 | 0.00 |
+
+- Totals reconcile: D1 users 255,174; D7 users 238,636; D30 users 170,403; D30 returners 223 (all match the overall retention query).
+- Channels retain almost equally. D1 4.14 to 4.41%, D7 0.56 to 0.74% (excluding the 85-user group).
+- Largest gaps (Paid vs Organic D1, rough z about 1.4; Store referral vs Organic D7, about 1.7) are within chance. Formal tests in Python.
+- Day 30 rests on 11 to 75 returning users per channel. Not reliable for comparison.
+- Hypothesis: obfuscation may flatten channel differences. Limitation.
