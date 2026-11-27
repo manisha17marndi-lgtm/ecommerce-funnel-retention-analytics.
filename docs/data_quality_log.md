@@ -342,3 +342,15 @@ Session return on exact Day N (UTC dates). User-level eligibility: first_visit d
 - Columns: channel, device, cohort week, eligibility flags (D1, D7/funnel, D30/repeat), 7-day funnel flags, orders and revenue (7d), orders (30d), retention flags (session D1/D7/D30, shopping D1/D7).
 - Reconciliation check matched earlier results: users 257,299; funnel cohort 238,636; buyers (7d) 2,424; revenue (7d) 185,106; D1 returned 10,754; D7 returned 1,586; D30 returned 223.
 - Purpose: single source for Power BI measures and the Python recalculation.
+
+## 26 Nov 2026: Python check on rpt_user_metrics (Colab notebook)
+
+- Loaded rpt_user_metrics into Pandas and recomputed funnel counts, buyers, revenue and D1/D7/D30 returns from its flags.
+- All values matched the SQL results.
+- Limitation: this check reads flags created by SQL, so it does not test the SQL rules themselves. Independent rebuild from raw purchase events is the next check.
+
+## 27 Nov 2026: independent rebuild of orders in Pandas (Colab notebook)
+
+- Rebuilt valid orders from raw purchase events in Pandas: real transaction_id, revenue above 0, earliest event per order_id + user_id.
+- Results matched the SQL orders table (valid orders, buyers, revenue) and the 7-day figures (orders, buyers, revenue).
+- This tests the SQL rules, not only the SQL flags.
