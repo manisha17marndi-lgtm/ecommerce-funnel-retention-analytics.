@@ -377,3 +377,20 @@ Two-proportion z-tests with Wilson intervals, Holm correction across 9 compariso
 - AOV: Paid 75.19 (143 orders) vs Organic 66.15 (1,078 orders). Bootstrap 95% CI for difference -4.87 to 24.38, includes zero. Not established.
 - Organic view-to-cart prints 18.77% (SQL 18.78%): test counts only users who viewed first; a few users have a cart event without a view.
 - Limitations: comparisons chosen after viewing results (post hoc); user_pseudo_id is a device identifier, so independence is approximate.
+
+## 27 Nov 2026: Day 1 returners vs non-returners (Colab notebook)
+
+Cohort: funnel cohort (238,636 new users, 7-day window). Returned = session_start on Day 1 (UTC dates).
+
+| | not returned D1 | returned D1 |
+|---|---|---|
+| users | 228,532 | 10,104 |
+| viewed item | 19.83% | 47.47% |
+| added to cart | 3.57% | 14.70% |
+| began checkout | 2.67% | 11.19% |
+| bought (7 days) | 0.80% | 5.86% |
+| avg 7-day revenue per user | 0.56 | 5.58 |
+
+- Returners are about 4.2% of the cohort, about 24% of buyers and about 30% of 7-day revenue (approximate, from rounded table values).
+- Descriptive only. Returners have more days to shop within the 7-day window, and shopping intent may cause returning. No causal claim.
+- Channel and device mix are nearly the same in both groups (e.g. Organic 38.4% vs 37.9%, desktop 58.1% vs 57.7%), consistent with the earlier tests.
