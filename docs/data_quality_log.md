@@ -394,3 +394,9 @@ Cohort: funnel cohort (238,636 new users, 7-day window). Returned = session_star
 - Returners are about 4.2% of the cohort, about 24% of buyers and about 30% of 7-day revenue (approximate, from rounded table values).
 - Descriptive only. Returners have more days to shop within the 7-day window, and shopping intent may cause returning. No causal claim.
 - Channel and device mix are nearly the same in both groups (e.g. Organic 38.4% vs 37.9%, desktop 58.1% vs 57.7%), consistent with the earlier tests.
+
+## 27 Nov 2026: independent Day 7 retention check (Colab notebook)
+
+- Recomputed Day 7 retention from raw session_start events in Pandas, without using SQL flags. Same definitions: UTC dates, exact Day 7, new users with no earlier activity, first_visit on or before 24 Jan 2021.
+- Result matched SQL: eligible users 238,636; returned on Day 7 1,586; retention 0.66%.
+- Limitation: both implementations use the same definitions, so this tests the logic and not whether the definitions are right.
