@@ -354,3 +354,26 @@ Session return on exact Day N (UTC dates). User-level eligibility: first_visit d
 - Rebuilt valid orders from raw purchase events in Pandas: real transaction_id, revenue above 0, earliest event per order_id + user_id.
 - Results matched the SQL orders table (valid orders, buyers, revenue) and the 7-day figures (orders, buyers, revenue).
 - This tests the SQL rules, not only the SQL flags.
+
+## 27 Nov 2026: significance tests (Colab notebook)
+
+Two-proportion z-tests with Wilson intervals, Holm correction across 9 comparisons. Bootstrap (10,000 resamples, seed 42) for order value.
+
+| test | rate A % | n A | rate B % | n B | diff (pp) | p raw | p Holm |
+|---|---|---|---|---|---|---|---|
+| Checkout to purchase: Store referral vs Organic | 28.35 | 381 | 34.04 | 2,782 | -5.69 | 0.0271 | 0.1894 |
+| View to cart: Paid Search vs Organic | 17.63 | 2,705 | 18.77 | 19,279 | -1.14 | 0.1547 | 0.7009 |
+| Purchased in 7 days: Paid Search vs Organic | 1.02 | 13,049 | 1.03 | 91,545 | -0.02 | 0.8721 | 1.0000 |
+| Purchased in 7 days: Desktop vs Mobile | 1.01 | 138,616 | 1.04 | 94,670 | -0.03 | 0.4654 | 1.0000 |
+| Purchased in 7 days: Tablet vs Desktop | 0.88 | 5,350 | 1.01 | 138,616 | -0.13 | 0.3567 | 1.0000 |
+| Day 1 return: Nov cohorts vs mid/late-Dec cohorts | 5.16 | 87,461 | 3.32 | 58,145 | 1.84 | 0.0000 | 0.0000 |
+| Day 7 return: Nov cohorts vs mid/late-Dec cohorts | 0.93 | 87,461 | 0.37 | 58,145 | 0.56 | 0.0000 | 0.0000 |
+| Day 7 return: Store referral vs Organic | 0.56 | 11,824 | 0.70 | 91,545 | -0.14 | 0.0843 | 0.5059 |
+| Day 1 return: Paid Search vs Organic | 4.41 | 13,954 | 4.15 | 97,894 | 0.27 | 0.1402 | 0.7009 |
+
+- Only the two cohort-timing tests are significant after correction. Cause unknown (season, traffic mix, product or tracking changes cannot be separated).
+- Store referral checkout-to-purchase gap (raw p 0.027) is not significant after correction. Dropped as a finding.
+- No evidence of channel or device effects on conversion or retention. Desktop vs mobile conversion gap: approximate 95% interval -0.11 to +0.05 pp (back-of-envelope).
+- AOV: Paid 75.19 (143 orders) vs Organic 66.15 (1,078 orders). Bootstrap 95% CI for difference -4.87 to 24.38, includes zero. Not established.
+- Organic view-to-cart prints 18.77% (SQL 18.78%): test counts only users who viewed first; a few users have a cart event without a view.
+- Limitations: comparisons chosen after viewing results (post hoc); user_pseudo_id is a device identifier, so independence is approximate.
